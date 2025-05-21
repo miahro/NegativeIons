@@ -1,4 +1,4 @@
-name: eco_aerosol_env
+name: negion
 channels:
   - conda-forge
   - defaults
