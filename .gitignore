@@ -1,4 +1,4 @@
-/data
+*.csv
 __pycache__
 mlruns/
 multirun/

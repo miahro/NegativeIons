@@ -18,10 +18,10 @@ FILE_PATHS = {
     "sii_raw": os.path.join(RAW_DIR, "sii_raw_data.csv"),
     "kum_raw": os.path.join(RAW_DIR, "kum_raw_data.csv"),
     "var_rain": os.path.join(RAW_DIR, "var_rain.csv"),
-    "var_raw_w_rain": os.path.join(RAW_DIR, "var_raw_w_rain.csv"),
-    "hyy_raw_w_rain": os.path.join(RAW_DIR, "hyy_raw_w_rain.csv"),
+    # "var_raw_w_rain": os.path.join(RAW_DIR, "var_raw_w_rain.csv"),
+    # "hyy_raw_w_rain": os.path.join(RAW_DIR, "hyy_raw_w_rain.csv"),
 
-    # Negative Ions Data
+    # Negative Ions Source Data
     "var_neg_ions_txt": os.path.join(NEG_IONS_DIR, "Varrio negaaive ions.txt"),
     "hyy_neg_ions_txt": os.path.join(NEG_IONS_DIR, "Hyytiala negaaive ions.txt"),
     "sii_neg_ions_txt": os.path.join(NEG_IONS_DIR, "Siikaneva negaaive ions.txt"),
@@ -42,9 +42,13 @@ FILE_PATHS = {
     # Exploratory Data Files
     "var_metadata_range": os.path.join(EXPLORATORY_DIR, "var_metadata_range.csv"),
     "hyy_metadata_range": os.path.join(EXPLORATORY_DIR, "hyy_metadata_range.csv"),
-    'var_summer_csv': os.path.join(EXPLORATORY_DIR, 'var_summer.csv'),
-    "var_summer_w_rain_csv": os.path.join(EXPLORATORY_DIR, "var_summer_w_rain.csv"),
-    "var_all_w_rain_csv": os.path.join(EXPLORATORY_DIR, "var_all_w_rain.csv"),
+    "var_combined": os.path.join(EXPLORATORY_DIR, "var_combined.csv"),
+    "hyy_combined": os.path.join(EXPLORATORY_DIR, "hyy_combined.csv"),
+
+
+    # 'var_summer_csv': os.path.join(EXPLORATORY_DIR, 'var_summer.csv'),
+    # "var_summer_w_rain_csv": os.path.join(EXPLORATORY_DIR, "var_summer_w_rain.csv"),
+    # "var_all_w_rain_csv": os.path.join(EXPLORATORY_DIR, "var_all_w_rain.csv"),
 
 
     # Intermediate results
