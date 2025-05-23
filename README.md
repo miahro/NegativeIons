@@ -2,24 +2,16 @@
 
 ## **Description**
 
-Description here
+This repository contains Jupyter notebooks to download SMEAR data from SmartSMEAR API, combine downloaded data with manually added negatice ion concentration data, prepocess and explore data. Repository also includes Hydra controlled machnine learning pipeine to build ML models and perform ML experiments with this data. 
 
 ## **Table of Contents**
-- [Features](#features)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- 
+- [Notebooks](#notebooks)
+- [MLflow](#mlflow)
+- [Hydra](#hydra)
 - [License](#license)
 
-
----
-
-## **Features** 
-- Feature 1: Example description
-- Feature 2: Example description
-- Feature 3: Example description
-
----
 
 ## **Installation**
 
@@ -80,14 +72,14 @@ git push origin main
 ---
 
 
-## File and variable configuration
+## **Configuration**
 
 The locations of kocal files (downloaded SMEAR data, target variable as text files, metadata and intermediate preprocessing results) are defined in file ```file_config.py```. Adjust as necessary.
 
 The parameters to be downloaded from SmartSMEAR API are defined in Jupyter notebook. ```smear_loader.ipynb```, adjust as necessary.
 
 
-## Loading, proprocessing and exploring the data
+## **Notebooks**
 
 1. Negative ion concentration data is assumed to be text file, with two columns: timestamp and concentration. The location of the file is specified in file ```file_config.py```
 2. Define SMEAR parameters to be downloaded in Jupyter notebook ```smear_loader.ipynb``` and run the notebook. Note, the downloaded data is saved into local ```.csv``` file, you only need to run loader once, unless downloaded parameters are changed.
@@ -116,6 +108,10 @@ mlflow server \
 > ```
 
 ---
+
+## **Hydra**
+
+x
 
 
 
