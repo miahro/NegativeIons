@@ -96,16 +96,17 @@ The parameters to be downloaded from SmartSMEAR API are defined in Jupyter noteb
 
 To start an MLflow tracking server locally:
 
+Move to director ```src```
 ```bash
-mlflow server \
-    --backend-store-uri sqlite:///mlflow.db \
-    --default-artifact-root ./mlruns
+cd src
 ```
 
-> 💡 Ensure `mlflow` is installed in your Conda environment via conda-forge:
-> ```bash
-> conda install -c conda-forge mlflow
-> ```
+
+```bash
+mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns
+```
+
+MLflow server starts by default at address http://127.0.0.1:5000
 
 ---
 
