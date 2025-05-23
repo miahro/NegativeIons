@@ -1,0 +1,96 @@
+# config/base_varrio.yaml
+
+defaults:
+  - _self_  # Ensures correct merge order
+
+experiment:
+  name: "default_experiment_varrio"
+
+data:
+  file_path: "data/exploratory/varrio_combined.csv"
+  target: "2-2.3 nm"
+  timestamp: "Datetime"
+  year: null
+  years: null
+  start_date: "07-01"
+  end_date: "08-31"
+  drop_cols: ["VAR_META.RMM"]
+  permute_target_random: False
+  permute_target_day: False
+
+split:
+  year_split: False
+  test_years: [2023]
+  test_size: 0.2
+  random_state: 40
+  shuffle: True
+  day_split: False
+
+preprocessing:
+  missing_value_strategy:
+    selected: "dropna"
+    options:
+      dropna: {}
+      interpolation: 
+        method: "linear"
+        linear_features: ["VAR_META.TDRY0", "VAR_META.RH0", "VAR_META.PAR",
+                               "VAR_META.WS00", "VAR_META.SO2_1"]
+        circular_features: ["VAR_META.WDIR00"]
+      
+
+  transformations:
+    add_year: False
+    wind_method: xy  # Just a single string, not nested
+    add_time: True
+    period_method: cyclic
+    add_h2o: True
+    h2o_method: tetens
+    filter_rain: True
+    rain_column: VAR_META.rainint
+    rain_threshold: 0.01
+    filter_par: True
+    par_column: VAR_META.PAR
+    par_threshold: 20
+    add_time_lags: False  # Toggle to enable/disable time lagging
+    time_lagged_features:
+      VAR_META__SO2_1: null   # Apply lags of 1, 2, and 3 steps to SO₂
+      VAR_META__RH0: null        # Apply lags of 1 and 5 steps to RH
+      VAR_META__WS00: null          # Apply lag of 1 step to wind speed
+
+
+  normalizations:
+    log_features: ["2-2.3 nm", "VAR_META.SO2_1"]
+    minmax_features: null
+    standard_features: null
+    quantile_features: null
+
+  polynomial_features:
+    degree: null  # Set to None if not using polynomial features
+
+models:
+  - name: "LGBMRegressor"
+    params:
+      learning_rate: 0.1
+      max_depth: 15
+      num_leaves: 80
+      subsample: 0.6
+      n_estimators: 500
+      verbosity: -1
+      random_state: 42
+    grid_search:
+      enabled: false  # Default to no grid search
+      param_grid: {}
+
+
+training:
+  use_cv: True
+  cv_folds: 5
+  scoring: "r2"
+  search_method: "grid"
+  n_iter: 10
+  use_time_series_cv: False
+  use_groupKFold: False
+
+mlflow:
+  experiment_name: "default_experiment_varrio"
+  tracking_uri: "sqlite:///mlflow.db"

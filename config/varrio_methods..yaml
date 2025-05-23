@@ -1,0 +1,178 @@
+# config/base_lgbm.yaml
+
+defaults:
+  - base_varrio
+  - _self_  # Ensures correct merge order
+
+experiment:
+  name: "varrio_methods"
+
+data:
+  file_path: "data/exploratory/var_combined.csv"
+  target: "2-2.3 nm"
+  timestamp: "Datetime"
+  year: null
+  years: null
+  start_date: "07-01"
+  end_date: "08-31"
+  drop_cols: ["VAR_META.RMM"]
+  permute_target_random: False
+  permute_target_day: False
+
+split:
+  year_split: False
+  test_years: null
+  test_size: 0.2
+  random_state: 40
+  shuffle: False
+  day_split: False
+
+preprocessing:
+  missing_value_strategy:
+    selected: "dropna"
+    options:
+      dropna: {}
+      interpolation: 
+        method: "linear"
+        linear_features: ["VAR_META.TDRY0", "VAR_META.RH0", "VAR_META.PAR",
+                               "VAR_META.WS00", "VAR_META.SO2_1", "VAR_EDDY.u_star"]
+        circular_features: ["VAR_META.WDIR00"]
+      
+
+  transformations:
+    add_year: False
+    wind_method: xy  # Just a single string, not nested
+    add_time: True
+    period_method: cyclic
+    add_h2o: False
+    h2o_method: goff_gratch
+    filter_rain: True
+    rain_column: VAR_META.rainint
+    rain_threshold: 0.01
+    filter_par: False
+    par_column: VAR_META.PAR
+    par_threshold: 20
+    add_time_lags: null # Toggle to enable/disable time lagging
+    time_lagged_features:
+      VAR_META__SO2_1: [12]
+      VAR_META.RH0: [12] 
+      VAR_EDDY.u_star: [12]
+      #VAR_META.WS00: [1]  
+      VAR_META.TDRY0: [12]
+      VAR_META.PAR:  [12] 
+
+
+  normalizations:
+    # log_features: ['2-2.3 nm', 'VAR_META.SO2_1']
+    # min_max_features: ['VAR_META.RH0']
+    # standard_features: ['VAR_META.TDRY0', 'VAR_EDDY.u_star', 'VAR_META.PAR', 'VAR_META.RH0', 'h2o', 'windX', 'windY']
+
+    #log_features: null
+    log_features: ["2-2.3 nm", "VAR_META.SO2_1"]
+    minmax_features: null
+    standard_features: null
+    quantile_features: null
+
+  polynomial_features:
+    degree: null  # Set to None if not using polynomial features
+
+
+models:
+  - name: "LGBMRegressor"
+    params:
+      learning_rate: 0.01
+      max_depth: 8
+      num_leaves: 15
+      subsample: 0.6
+      n_estimators: 300
+      reg_lambda: 1
+      min_child_sample: 50
+      colsample_bytree: 0.6
+      verbosity: -1
+      random_state: 42
+    # grid_search:
+    # grid_search:
+    # grid_search:
+    #   enabled: true
+    #   param_grid:
+    #     learning_rate: [0.01]
+    #     max_depth: [8]
+    #     num_leaves: [15]
+    #     n_estimators: [300]
+    #     min_child_samples: [50]
+    #     reg_lambda: [1]
+    #     colsample_bytree: [0.6]
+    #     subsample: [0.6]
+
+  # - name: "LinearRegression"
+  #   params: {}
+  # # - name: "LinearRegression"
+  #   params: {}
+  # - name: "XGBRegressor"
+  #   params:
+  #     colsample_bytree: 1.0
+  #     gamma: 0
+  #     learning_rate: 0.1
+  #     max_depth: 10
+  #     n_estimators: 200
+  #     reg_lambda: 10
+  #     subsample: 0.8
+  #     verbosity: 0
+  # - name: "DecisionTreeRegressor"
+  #   params: {}
+  # - name: "RandomForestRegressor"
+  #   params: {
+  #     n_estimators: 300,
+  #     max_depth: 15,
+  #     min_samples_split: 2,
+  #     min_samples_leaf: 1,
+  #     bootstrap: True,
+  #     random_state: 42
+    # }
+  # - name: "MLPRegressor"
+  #   params: {
+  #     hidden_layer_sizes: [100, 100],
+  #     activation: "relu",
+  #     solver: "adam",
+  #     max_iter: 700,
+  #     alpha: 0.05,
+  #     learning_rate_init: 0.001,
+  #     random_state: 42
+  #   }
+
+
+
+
+training:
+  use_cv: True
+  cv_folds: 5
+  scoring: "r2"
+  search_method: "grid"
+  n_iter: 5
+  use_time_series_cv: False
+  use_groupKFold: False
+
+# hydra:
+#   sweeper:
+#     params:
+#       # preprocessing.transformations.add_time_lags: False, True
+#       #split.shuffle: True, False
+#       data.year: 2019,2020,2021,2022,2023,2024
+#       #split.day_split: True, False
+#       # preprocessing.transformations.add_time: False, True
+#       # training.use_time_series_cv: True, False
+
+#       # # data.year: 2019,2020,2021,2022,2023,2024
+#       # split.test_years: 
+#       #   choice([2019], [2020], [2021], [2022], [2023], [2024])
+
+      
+
+
+
+
+mlflow:
+  experiment_name: "varrio_methods_further3"
+  tracking_uri: "sqlite:///mlflow.db"
+
+
