@@ -42,8 +42,12 @@ FILE_PATHS = {
     # Exploratory Data Files
     "var_metadata_range": os.path.join(EXPLORATORY_DIR, "var_metadata_range.csv"),
     "hyy_metadata_range": os.path.join(EXPLORATORY_DIR, "hyy_metadata_range.csv"),
+    "sii_metadata_range": os.path.join(EXPLORATORY_DIR, "sii_metadata_range.csv"),
+    "kum_metadata_range": os.path.join(EXPLORATORY_DIR, "kum_metadata_range.csv"),
     "var_combined": os.path.join(EXPLORATORY_DIR, "var_combined.csv"),
     "hyy_combined": os.path.join(EXPLORATORY_DIR, "hyy_combined.csv"),
+    "sii_combined": os.path.join(EXPLORATORY_DIR, "sii_combined.csv"),
+    "kum_combined": os.path.join(EXPLORATORY_DIR, "kum_combined.csv"),
 
 
     # 'var_summer_csv': os.path.join(EXPLORATORY_DIR, 'var_summer.csv'),
