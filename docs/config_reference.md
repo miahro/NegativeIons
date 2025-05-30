@@ -183,6 +183,7 @@ python hydra_runner.py --multirun
 
 - All experiment configs inherit from `base_varrio.yaml` by default
 - Use `OmegaConf.to_yaml(cfg)` in your runner to inspect full config at runtime
+- More detailes explanation of parameters is available in [Thesis](Mikko_Ahro_Mastersthesis_2025)
 
 ---
 
