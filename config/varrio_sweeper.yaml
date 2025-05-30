@@ -3,7 +3,7 @@
 
 defaults:
   - base_varrio
-  - _self_  # Ensures correct merge order
+  - _self_  
 
 experiment:
   name: "varrio_sweeper"
@@ -42,7 +42,7 @@ preprocessing:
 
   transformations:
     add_year: False
-    wind_method: xy  # Just a single string, not nested
+    wind_method: xy  
     add_time: True
     period_method: cyclic
     add_h2o: False
@@ -53,7 +53,7 @@ preprocessing:
     filter_par: False
     par_column: VAR_META.PAR
     par_threshold: 20
-    add_time_lags: null # Toggle to enable/disable time lagging
+    add_time_lags: null 
     time_lagged_features:
       VAR_META__SO2_1: [12]
       VAR_META.RH0: [12] 
@@ -69,7 +69,7 @@ preprocessing:
     quantile_features: null
 
   polynomial_features:
-    degree: null  # Set to None if not using polynomial features
+    degree: null  
 
 
 models:
@@ -100,7 +100,6 @@ hydra:
   sweeper:
     params:
 
-      # data.year: 2019,2020,2021,2022,2023,2024
       split.test_years: 
         choice([2019], [2020], [2021], [2022], [2023], [2024])
     
