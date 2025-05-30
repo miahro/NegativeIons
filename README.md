@@ -96,7 +96,7 @@ The parameters to be downloaded from SmartSMEAR API are defined in Jupyter noteb
 
 To start an MLflow tracking server locally:
 
-Move to director ```src```
+Move to directory ```src```
 ```bash
 cd src
 ```
@@ -108,14 +108,13 @@ mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./
 
 MLflow server starts by default at address http://127.0.0.1:5000
 
+For further details on how to use MLflow for experiment tracking refer to official MLflow page [MLFlow](https://mlflow.org)
+
 ---
 
 ## **Hydra**
 
-See [Hydra Config Reference](docs/config_reference.md) for details on configurable parameters.
-
-
-
+Actual experiments are based on Hydra configuration mangement files. See [Hydra Config Reference](docs/config_reference.md) for details on configurable parameters.
 
 
 ## **License**
