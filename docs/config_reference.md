@@ -18,11 +18,9 @@ to correspond to relevant experiment name.
 
 You can run an experiment with:
 ```bash
-```bash
 cd src && python hydra_runner.py --multirun 
 ```
 
-```
 
 ---
 
