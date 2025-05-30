@@ -116,6 +116,14 @@ For further details on how to use MLflow for experiment tracking refer to offici
 
 Actual experiments are based on Hydra configuration mangement files. See [Hydra Config Reference](docs/config_reference.md) for details on configurable parameters.
 
+Run selected configuration by:
+
+```bash
+cd src && python hydra_runner.py --multirun 
+```
+
+
+
 
 ## **License**
 
