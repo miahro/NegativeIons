@@ -6,7 +6,7 @@ from utils.hydra_modeling import perform_regression_mlflow_hydra
 import hydra.core.hydra_config
 
 
-@hydra.main(config_path="../config", config_name="varrio_methods", version_base="1.3")
+@hydra.main(config_path="../config", config_name="varrio_sweeper", version_base="1.3")
 def main(cfg):
 
     hydra_cfg = hydra.core.hydra_config.HydraConfig.get()

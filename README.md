@@ -112,7 +112,8 @@ MLflow server starts by default at address http://127.0.0.1:5000
 
 ## **Hydra**
 
-x
+See [Hydra Config Reference](docs/config_reference.md) for details on configurable parameters.
+
 
 
 

@@ -1,12 +1,12 @@
 # config/base_lgbm.yaml
-# example running running ML models LGBM, Linear regression, XGB regression, Decision tree, Random Forest and MLP regressor
+# Example modelling full data set 5 times, using each individual year as test set once. 
 
 defaults:
   - base_varrio
   - _self_  # Ensures correct merge order
 
 experiment:
-  name: "varrio_methods"
+  name: "varrio_sweeper"
 
 data:
   file_path: "data/exploratory/var_combined.csv"
@@ -85,41 +85,6 @@ models:
       colsample_bytree: 0.6
       verbosity: -1
       random_state: 42
-  - name: "LinearRegression"
-    params: {}
-  - name: "XGBRegressor"
-    params:
-      colsample_bytree: 1.0
-      gamma: 0
-      learning_rate: 0.1
-      max_depth: 10
-      n_estimators: 200
-      reg_lambda: 10
-      subsample: 0.8
-      verbosity: 0
-  - name: "DecisionTreeRegressor"
-    params: {}
-  - name: "RandomForestRegressor"
-    params: {
-      n_estimators: 300,
-      max_depth: 15,
-      min_samples_split: 2,
-      min_samples_leaf: 1,
-      bootstrap: True,
-      random_state: 42
-    }
-  - name: "MLPRegressor"
-    params: {
-      hidden_layer_sizes: [100, 100],
-      activation: "relu",
-      solver: "adam",
-      max_iter: 700,
-      alpha: 0.05,
-      learning_rate_init: 0.001,
-      random_state: 42
-    }
-
-
 
 
 training:
@@ -131,10 +96,17 @@ training:
   use_time_series_cv: False
   use_groupKFold: False
 
+hydra:
+  sweeper:
+    params:
 
+      # data.year: 2019,2020,2021,2022,2023,2024
+      split.test_years: 
+        choice([2019], [2020], [2021], [2022], [2023], [2024])
+    
 
 mlflow:
-  experiment_name: "varrio_methods"
+  experiment_name: "varrio_sweeper"
   tracking_uri: "sqlite:///mlflow.db"
 
 
